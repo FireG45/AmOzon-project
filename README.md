@@ -28,9 +28,7 @@
 - [Django](https://www.djangoproject.com/)
 
 ## Способы обмена информацией 
-### Используемый планировщик задач: Notion
-* https://www.notion.so/invite/4f6d772d81d606c15c2ad7b24144343d880c53ac 
-Все запланированные и выполненные задачи должны быть описаны в планировщике задач.
+### Используемый планировщик задач: [GitHub Projects](https://github.com/users/FireG45/projects/1) 
 
 ## Коммуникация: 
 * Общение по проекту происходит с помощью Discord и чата Telegram
