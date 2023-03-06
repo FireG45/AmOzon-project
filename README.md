@@ -12,7 +12,9 @@
 * частично бэкэнд
 * частично фронтэнд
 
-## Используемый стиль кода: CamelCase
+## Используемый стиль кода: 
+* Соглашение об именовании: [CamelCase](https://ru.wikipedia.org/wiki/CamelCase)
+* Общий стиль кода [PEP 8](https://peps.python.org/pep-0008/)
 
 ## Технологии
 ### Frontend  
@@ -21,8 +23,7 @@
 - css
 
 ### Backend 
-- [ASP.NET](https://dotnet.microsoft.com/en-us/apps/aspnet)
-- [Entity Framework](https://learn.microsoft.com/ru-ru/ef/)
+- [Django](https://www.djangoproject.com/)
 
 ## Способы обмена информацией 
 ### Используемый планировщик задач: Notion
@@ -31,4 +32,5 @@
 
 ## Коммуникация: 
 * Общение по проекту происходит с помощью Discord и чата Telegram
+* Для размещения базы знаний будут использоваться wiki-страницы GitHub
 
