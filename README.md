@@ -21,11 +21,13 @@
 ## Технологии
 ### Frontend  
 - Javasсript 
+- Bootstrap
 - HTML5 
 - css
 
 ### Backend 
 - [Django](https://www.djangoproject.com/)
+- SQLite
 
 ## Способы обмена информацией 
 ### Используемый планировщик задач: [GitHub Projects](https://github.com/users/FireG45/projects/1) 
