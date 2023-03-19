@@ -18,5 +18,5 @@ from main import views
 
 urlpatterns = [
     path('', views.index, name="home"),
-    path('details', views.details, name = 'details'),
+    path('<int:pk>', views.ProductDetailView.as_view(), name="details"),
 ]
