@@ -1,5 +1,7 @@
 {% extends 'main/layout.html' %}
 
+{% block title %} AmOzon - Главная {% endblock %}
+
 {% block content %}
 
 <div class="container">
@@ -9,7 +11,7 @@
           <div class="card shadow-sm">
             <img src="{{prod.image}}" width="100%" height="225" role="img" preserveaspectratio="xMidYMid slice" focusable="false">
             <div class="card-body">
-              <p class="card-text">{{prod.title}}</p>
+              <a href="{% url 'details' prod.id %}"><p class="card-text">{{prod.title}}</p></a>
               <div class="d-flex justify-content-between align-items-center">
                 <span class="">{{prod.price}} <i class="fa-solid fa-ruble-sign"></i></span>
               </div>
