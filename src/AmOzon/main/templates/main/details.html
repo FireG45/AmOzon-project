@@ -5,32 +5,159 @@
 {% block content %}
 
 <!-- Product section-->
-<section class="py-5">
+<!-- <section class="py-5">
   <div class="container px-4 px-lg-5 my-5">
       <div class="row gx-4 gx-lg-5 align-items-center">
-          <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." /></div>
-          <div class="col-md-6">
-              <h1 class="display-5 fw-bolder">{{product.title}}</h1>
-              <div class="fs-5 mb-5">
-                  <span>{{product.price}} <i class="fa-solid fa-ruble-sign"></i></span>
+          <div class="col-md-4"><img class="card-img-top mb-5 mb-md-0" src="{{product.image}}" alt="..." /></div>
+    <div class="col-md-6">
+        <h1 class="display-5 fw-bolder">{{product.title}}</h1>
+        <div class="fs-5 mb-5">
+            <span>{{product.price}} <i class="fa-solid fa-ruble-sign"></i></span>
+        </div>
+        <p class="lead">{{product.description}}</p>
+        <div class="d-flex">
+            <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
+            <button class="btn btn-outline-dark flex-shrink-0" type="button">
+                <i class="bi-cart-fill me-1"></i>
+                Добавить в корзину
+            </button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <h2 class="fw-bolder mb-4">Характеристики</h2>
+        <ul>
+            <li>
+              <div class="left">
+                <span class="item__label">Вес</span>
               </div>
-              <p class="lead">{{product.description}}</p>
-              <div class="d-flex">
-                  <input class="form-control text-center me-3" id="inputQuantity" type="num" value="1" style="max-width: 3rem" />
-                  <button class="btn btn-outline-dark flex-shrink-0" type="button">
-                      <i class="bi-cart-fill me-1"></i>
-                      Добавить в корзину
-                  </button>
-              </div>
-          </div>
+              <span class="item__cor">36 шт</span>
+            </li>
+            <li>
+              <div class="left">
+                <span class="item__label">Прочность</span>
+              </div>    
+              <span class="item__cor">200 - 400 кг/см</span>
+            </li>
+          </ul>
       </div>
   </div>
-</section>
+</section> -->
+
+<section class="h-100 gradient-custom">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center my-4">
+        <div class="col-md-8">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">{{product.title}}<i class="fa-solid fa-ruble-sign"></i></h5>
+            </div>
+            <div class="card-body">
+              <!-- Single item -->
+              <div class="row">
+                <div class="col-lg-3 col-md-12 mb-4 mb-lg-0">
+                  <!-- Image -->
+                  <div class="bg-image hover-overlay hover-zoom ripple rounded" data-mdb-ripple-color="light">
+                    <img src="{{product.image}}"
+                      class="w-100" alt="Blue Jeans Jacket" />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                    </a>
+                  </div>
+                  <!-- Image -->
+                </div>
+  
+                
+  
+                <div class="col-lg-4 col-md-6 mb-4 mb-lg-0">
+                  <!-- Quantity -->
+                  <div class="d-flex mb-4" style="max-width: 300px">
+                    <button class="btn btn-primary px-3 me-2"
+                      onclick="this.parentNode.querySelector('input[type=number]').stepDown()">
+                      <i class="fas fa-minus"></i>
+                    </button>
+  
+                    <div class="form-outline">
+                      <input id="form1" min="0" name="quantity" value="1" type="number" class="form-control" />
+                      <label class="form-label" for="form1">Количество</label>
+                    </div>
+  
+                    <button class="btn btn-primary px-3 ms-2"
+                      onclick="this.parentNode.querySelector('input[type=number]').stepUp()">
+                      <i class="fas fa-plus"></i>
+                    </button>
+                  </div>
+                  <!-- Quantity -->
+  
+                  <!-- Price -->
+                  <p class="text-start text-md-center">
+                    <strong>{{product.price}}</strong>
+                  </p>
+                  <!-- Price -->
+
+                  <!-- Data -->
+                  <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                  <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                    title="Remove item">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
+                    title="Move to the wish list">
+                    <i class="fas fa-heart"></i>
+                  </button>
+                  <!-- Data -->
+                </div>
+                </div>
+              </div>
+              <!-- Single item -->
+  
+              <hr class="my-4" />
+            </div>
+          </div>
+          <div class="card mb-4">
+            <div class="card-body">
+              <p><strong>Ожидаемое время доставки</strong></p>
+              <p class="mb-0">12.10.2020 - 14.10.2020</p>
+            </div>
+          </div>
+          
+        </div>
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-header py-3">
+              <h5 class="mb-0">Характеристики</h5>
+            </div>
+            <div class="card-body">
+                <ul>
+                    <li>
+                      <div class="left">
+                        <span class="item__label">Вес</span>
+                      </div>
+                      <span class="item__cor">36 шт</span>
+                    </li>
+                    <li>
+                      <div class="left">
+                        <span class="item__label">Прочность</span>
+                      </div>    
+                      <span class="item__cor">200 - 400 кг/см</span>
+                    </li>
+                  </ul>
+  
+              <button type="button" class="btn btn-primary btn-lg btn-block">
+                Добавить в корзину
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
 <section class="py-5 bg-light">
   <div class="container px-4 px-lg-5 mt-5">
-      <h2 class="fw-bolder mb-4">Характеристики</h2>
-      <p class="lead">{{product.parameters}}</p>
+      <h2 class="fw-bolder mb-4">Описание</h2>
+      
+      <p class="lead">{{product.description}}</p>
   </div>
 </section>
 
