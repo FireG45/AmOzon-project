@@ -50,8 +50,8 @@
             </form>
     
             <div class="text-end">
-              <button type="button" class="btn btn-light text-dark me-2">Login</button>
-              <button type="button" class="btn btn-primary">Sign-up</button>
+              <a type="button" class="btn btn-light text-dark me-2" href="{% url 'login' %}" >Войти</a>
+              <a type="button" class="btn btn-primary" href="{% url 'register' %}" >Зарегистрироваться</a>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
     
     <div class="container">
       <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
-        <p class="col-md-4 mb-0 text-muted">© 2022 Company, Inc</p>
+        <p class="col-md-4 mb-0 text-muted">© 2023 AmOzon</p>
     
         <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-dark text-decoration-none">
           <img src="{% static "img/logo.png" %}" alt="" width="100">
