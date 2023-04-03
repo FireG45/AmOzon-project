@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from phonenumber_field.modelfields import PhoneNumberField
+from main.models import Product
 import datetime
 
 class User(AbstractUser):
@@ -12,3 +13,11 @@ class User(AbstractUser):
         ('N', 'Не указан'),
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+
+class Basket(models.Model):
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)
+    quantity = models.PositiveSmallIntegerField(default=0)
+
+    def __str__(self) -> str:
+        return f"Корзина {self.user.username} Продукт {self.product.title}"
