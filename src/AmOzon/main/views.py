@@ -6,6 +6,9 @@ from django.views.generic import DetailView
 def index(request):
     return render(request, 'main/index.html', {'products' : Product.objects.all()})
 
+def cart(request):
+    return render(request, 'main/cart.html')
+
 def check_out(request):
     return render(request,'main/chekout.html')
 

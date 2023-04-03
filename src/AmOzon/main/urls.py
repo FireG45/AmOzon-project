@@ -18,6 +18,7 @@ from main import views
 
 urlpatterns = [
     path('', views.index, name="home"),
+    path('/cart', views.cart, name='cart'),
     path('<int:pk>', views.ProductDetailView.as_view(), name="details"),
     path('check_out',views.check_out),
     path('userauth/', include("userauth.urls")),
