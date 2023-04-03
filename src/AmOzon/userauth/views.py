@@ -3,6 +3,8 @@ from userauth.models import User
 from userauth.forms import UserLoginForm, UserRegistrationForm
 from django.contrib import auth
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 # Create your views here.
 def login(request):
@@ -32,5 +34,10 @@ def register(request):
         form = UserRegistrationForm()
     context = {'form' : form}
     return render(request, 'userauth/register.html', context)
+
+@login_required
+def logout(request):
+    auth.logout(request)
+    return HttpResponseRedirect(reverse('home'))
 
 

@@ -50,8 +50,12 @@
             </form>
     
             <div class="text-end">
-              <a type="button" class="btn btn-light text-dark me-2" href="{% url 'login' %}" >Войти</a>
-              <a type="button" class="btn btn-primary" href="{% url 'register' %}" >Зарегистрироваться</a>
+              {% if request.user.is_authenticated %}
+                <a type="button" class="btn btn-dark text-light me-2" href="{% url 'logout' %}" >Выйти</a>
+              {% else %}
+                <a type="button" class="btn btn-light text-dark me-2" href="{% url 'login' %}" >Войти</a>
+                <a type="button" class="btn btn-primary" href="{% url 'register' %}" >Зарегистрироваться</a>
+              {% endif %}
             </div>
           </div>
         </div>
