@@ -33,12 +33,14 @@
                     Профиль
                   </a>
                 </li>
+                {% if request.user.is_authenticated %}
                 <li>
                   <a href="{% url 'cart' %}" class="nav-link text-dark">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
                     Корзина
                   </a>
                 </li>
+                {% endif %}
               </ul>
             </div>
           </div>

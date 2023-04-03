@@ -13,14 +13,14 @@ def duplicate(modeladmin, request, queryset):
 @admin.action(description='Переименовывет выбраннные записи в записи с id в имени')
 def set_name_as_id(modeladmin, request, queryset):
     for object in queryset:
-        object.title = object.id
+        object.title = f"Товар {object.id}"
         object.save()
 
 @admin.action(description='Рандомизирует цену у выбраннныъ записей')
 def randomize_price(modeladmin, request, queryset):
     import random
     for object in queryset:
-        object.price = random.randint(65, 125000)
+        object.price = random.randint(65, 10500)
         object.save()
 
 admin.site.add_action(duplicate)

@@ -20,4 +20,7 @@ class Basket(models.Model):
     quantity = models.PositiveSmallIntegerField(default=0)
 
     def __str__(self) -> str:
-        return f"Корзина {self.user.username} Продукт {self.product.title}"
+        return f"Корзина {self.user.username} Продукт {self.product.title} {self.quantity}"
+    
+    def price(self):
+        return self.product.price * self.quantity
