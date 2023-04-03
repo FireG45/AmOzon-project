@@ -9,6 +9,9 @@ def index(request):
 def cart(request):
     return render(request, 'main/cart.html')
 
+def check_out(request):
+    return render(request,'main/chekout.html')
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'main/details.html' 
