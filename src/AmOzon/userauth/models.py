@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from main.models import Product
 import datetime
 
-class User(AbstractUser):
+class User(AbstractUser):    
     phone = PhoneNumberField(blank=True, region="RU")
     birth_date = models.DateField(default=datetime.date.today)
     GENDER_CHOICES = (
@@ -13,6 +13,17 @@ class User(AbstractUser):
         ('N', 'Не указан'),
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
+
+class Seller(User):
+    verbouse_name='Магазины'
+    shop_name = models.CharField(max_length=50)
+    org_type = models.CharField(max_length=10)
+    inn_code = models.CharField(max_length=13)
+    store_tags = models.TextField()
+
+    class Meta:
+        verbose_name = "Магазин"
+        verbose_name_plural = "Магазины"
 
 class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)

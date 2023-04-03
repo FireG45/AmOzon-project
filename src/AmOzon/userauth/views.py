@@ -5,6 +5,7 @@ from django.contrib import auth
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.contrib.auth.models import Group
 
 # Create your views here.
 def login(request):
@@ -29,7 +30,14 @@ def register(request):
         form = UserRegistrationForm(data = request.POST)
         if form.is_valid():
             form.save()
+            user = User.objects.get(username=request.POST["username"])            
+            group = Group.objects.get(name='Customer') 
+            user.groups.clear()
+            user.groups.add(group)
+
             return HttpResponseRedirect(reverse('login'))
+        else:
+            print("invalid")
     else:
         form = UserRegistrationForm()
     context = {'form' : form}
