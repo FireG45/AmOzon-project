@@ -4,7 +4,7 @@ from phonenumber_field.modelfields import PhoneNumberField
 from main.models import Product
 import datetime
 
-class User(AbstractUser):    
+class User(AbstractUser):
     phone = PhoneNumberField(blank=True, region="RU")
     birth_date = models.DateField(default=datetime.date.today)
     GENDER_CHOICES = (
