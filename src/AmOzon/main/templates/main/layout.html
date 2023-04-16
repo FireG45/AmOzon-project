@@ -33,7 +33,7 @@
                     Профиль
                   </a>
                 </li> -->
-                {% if request.user.is_authenticated %}
+                {% if request.user.is_authenticated and not perms.main. %}
                 <li>
                   <a href="{% url 'cart' %}" class="nav-link text-dark">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
@@ -41,11 +41,11 @@
                   </a>
                 </li>
                 {% endif %}
-                {% if not perms.main. %}
+                {% if not perms.main. and not request.user.is_authenticated %}
                 <li>
-                  <a href="{% url 'seller_register' %}" class="nav-link text-dark">
+                  <a href="{% url 'seller_login' %}" class="nav-link text-dark">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#table"></use></svg>
-                    Стать продавцом
+                    Войти в личный кабинет продавца
                   </a>
                 </li>
                 {% endif %}
@@ -61,6 +61,12 @@
     
             <div class="text-end">
               {% if request.user.is_authenticated %}
+                {% if not perms.main. %}
+                  <a class="" href="{% url 'user_profile' %}"> {{request.user}}</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                {% else %}
+                  <a class="" href="{% url 'seller_profile' %}"> {{request.user}}</a> &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                {% endif %}
+
                 <a type="button" class="btn btn-dark text-light me-2" href="{% url 'logout' %}" >Выйти</a>
               {% else %}
                 <a type="button" class="btn btn-light text-dark me-2" href="{% url 'login' %}" >Войти</a>
@@ -83,13 +89,13 @@
           <img src="{% static "img/logo.png" %}" alt="" width="100">
         </a>
     
-        <ul class="nav col-md-4 justify-content-end">
+        <!-- <ul class="nav col-md-4 justify-content-end">
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
           <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-        </ul>
+        </ul> -->
       </footer>
     </div>
 </body>

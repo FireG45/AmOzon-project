@@ -1,0 +1,18 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Удаление товара {% endblock %}
+
+{% block content %}
+    <div class=" container">
+    {% if user.id == product.seller.id %}
+        <h1> Вы уверены что хотите удалить товар?</h1>
+        <form method="post">
+            {% csrf_token %}
+            <button class="btn btn-danger" type="submit">Удалить товар</button>
+            <a href="{% url 'seller_profile' %}" class="btn btn-success">Отмена</a>  
+        </form>
+    {% else %}
+        <H1>Нет доступа!</H1>
+    {% endif %}
+    </div>
+{% endblock %}
