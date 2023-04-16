@@ -8,7 +8,3 @@ class Product(models.Model):
     price = models.PositiveBigIntegerField(verbose_name="Цена товара")
     category = models.CharField(verbose_name="Категория товара", max_length=250)
     image = models.URLField(verbose_name="Ссылка на изображение товара")
-    seller = models.ForeignKey("userauth.Seller", on_delete=models.CASCADE)
-
-class Order(models.Model):
-    ...
