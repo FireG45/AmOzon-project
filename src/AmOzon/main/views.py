@@ -29,6 +29,17 @@ def checkout(request):
     }
     return render(request,'main/chekout.html', context)
 
+#Новые данные№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№
+def tovar(request):
+    return render(request,'main/tovar.html')
+
+def change(request):
+    return render(request,'main/change.html')
+
+def delete(request):
+    return render(request,'main/delete.html')
+#Новые данные№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'main/details.html' 
