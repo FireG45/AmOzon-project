@@ -76,9 +76,6 @@ def seller_register(request):
     context = {'form' : form}
     return render(request, 'userauth/seller_register.html', context)
 
-def user_account(request):
-    return render(request, 'userauth/user_account.html')
-
 @login_required
 def logout(request):
     auth.logout(request)

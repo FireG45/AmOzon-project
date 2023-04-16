@@ -1,24 +1,4 @@
 {% extends 'main/layout.html' %}
-<<<<<<< HEAD
-{% load static %}
-{% block title %} AmOzon - Главная {% endblock %}
-
-{% block content %}
-<h2>
-    Вы уверены,что хотите удалить товар?
-</h2>
-<div class="input-group">
-    <button type ="button" class="w-25 btn btn-primary btn-lg" type="submit" href="{% url 'end_checkout' %}">Нет</a> <button type="button" class="w-25 btn btn-outline-danger" data-bs-toggle="collapse" href = "#collapse">Да</button>
-<!-- <div class="collapse w-75" id="collapse">
-    <div class="card card-body ">
-      Это действие нельзя отменить. Вы уверены?
-    </div>
-    <div class="input-group">
-    <a class="w-50 btn btn-primary btn-lg" type="submit" href="{% url 'end_checkout' %}">Нет</a>
-    <button type="button" class="w-50 btn btn-outline-danger" data-bs-toggle="collapse">Да, удалить товар</button>
-    </div>
-</div> -->
-=======
 
 {% block title %} Удаление товара {% endblock %}
 
@@ -35,5 +15,4 @@
         <H1>Нет доступа!</H1>
     {% endif %}
     </div>
->>>>>>> main
 {% endblock %}
