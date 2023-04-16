@@ -97,7 +97,7 @@ def end_checkout(request):
 
 @login_required(login_url='/userauth/login')
 def user_profile(request):
-    return HttpResponseRedirect('/')
+        return render(request, "userauth/user_profile.html")
 
 @permission_required('main.', login_url='userauth/seller_login/')
 def seller_profile(request):
