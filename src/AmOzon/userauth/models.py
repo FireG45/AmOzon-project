@@ -14,6 +14,17 @@ class User(AbstractUser):
     )
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES)
 
+class Seller(User):
+    verbouse_name='Магазины'
+    shop_name = models.CharField(max_length=50)
+    org_type = models.CharField(max_length=10)
+    inn_code = models.CharField(max_length=13)
+    store_tags = models.TextField()
+
+    class Meta:
+        verbose_name = "Магазин"
+        verbose_name_plural = "Магазины"
+
 class Basket(models.Model):
     user = models.ForeignKey(to=User, on_delete=models.CASCADE)
     product = models.ForeignKey(to=Product, on_delete=models.CASCADE)

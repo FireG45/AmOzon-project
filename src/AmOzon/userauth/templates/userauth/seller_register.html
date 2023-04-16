@@ -1,0 +1,103 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Регистрация {% endblock %}
+
+{% block content %}
+
+<section class="vh-100 gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Регистрация</h3>
+              <form action="{% url 'seller_register' %}", method="post">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+
+                      <div class="form-outline">
+                        {{ form.shop_name }}
+                      <label class="form-label" for="{{ form.shop_name.id_for_label }}">Название магазина</label>
+                    </div>
+                      </div>
+
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      {{ form.org_type }}
+                      <label class="form-label" for="{{ form.org_type.id_for_label }}">Тип организации</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4">
+  
+                    <div class="form-outline">
+                      {{ form.username }}
+                      <label class="form-label" for="{{ form.username.id_for_label }}">Логин</label>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 d-flex align-items-center">
+  
+                    <div class="form-outline datepicker w-100">
+                        {{ form.inn_code }}
+                      <label for="{{ form.inn_code.id_for_label }}" class="form-label">ИНН</label>
+                    </div>
+  
+                  </div>
+                </div>
+  
+                <div class="row">
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                        {{ form.email }}
+                      <label class="form-label" for="{{ form.email.id_for_label }}">Email</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                        {{ form.store_tags }}
+                      <label class="form-label" for="{{ form.store_tags.id_for_label }}">Категории товаров</label>
+                    </div>
+  
+                  </div>
+
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                        {{ form.password1 }}
+                      <label class="form-label" for="{{ form.password1.id_for_label }}">Пароль</label>
+                    </div>
+  
+                  </div>
+                  <div class="col-md-6 mb-4 pb-2">
+  
+                    <div class="form-outline">
+                        {{ form.password2 }}
+                      <label class="form-label" for="{{ form.password2.id_for_label }}">Повторите пароль</label>
+                    </div>
+  
+                  </div>
+                </div>
+
+  
+                <div class="mt-4 pt-2">
+                  <input class="btn btn-primary btn-lg" type="submit" value="Зарегистрироваться" />
+                </div>
+  
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+{% endblock %}

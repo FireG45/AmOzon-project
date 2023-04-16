@@ -32,7 +32,19 @@
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                     Профиль
                   </a>
+<<<<<<< HEAD
+                </li>
+                {% if not request.user.is_authenticated %}
+                <li>
+                  <a href="{% url 'seller_register' %}" class="nav-link text-dark">
+                    <svg class="bi d-block mx-auto mb-1 button" width="24" height="24"><use xlink:href="#table"></use></svg>
+                    Стать продавцом
+                  </a>
+                </li>
+                {% endif %}
+=======
                 </li> -->
+>>>>>>> main
                 {% if request.user.is_authenticated %}
                 <li>
                   <a href="{% url 'cart' %}" class="nav-link text-dark">
