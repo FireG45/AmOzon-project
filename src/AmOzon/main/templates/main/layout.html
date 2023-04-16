@@ -22,16 +22,17 @@
     
               <ul class="nav col-12 col-lg-auto my-2 justify-content-center my-md-0 text-small">
                 <li>
-                  <a href="#" class="nav-link text-dark">
+                  <a href="{% url 'home' %}" class="nav-link text-dark">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#home"></use></svg>
                     Главная
                   </a>
                 </li>
-                <li>
+                <!-- <li>
                   <a href="#" class="nav-link text-dark">
                     <svg class="bi d-block mx-auto mb-1" width="24" height="24"><use xlink:href="#speedometer2"></use></svg>
                     Профиль
                   </a>
+<<<<<<< HEAD
                 </li>
                 {% if not request.user.is_authenticated %}
                 <li>
@@ -41,6 +42,9 @@
                   </a>
                 </li>
                 {% endif %}
+=======
+                </li> -->
+>>>>>>> main
                 {% if request.user.is_authenticated %}
                 <li>
                   <a href="{% url 'cart' %}" class="nav-link text-dark">
@@ -55,7 +59,7 @@
         </div>
         <div class="px-3 py-2 border-bottom mb-3">
           <div class="container d-flex flex-wrap justify-content-center">
-            <form class="w-50 col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
+            <form class="w-75 col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto" role="search">
               <input type="search" class="form-control" placeholder="Поиск..." aria-label="Search">
             </form>
     
