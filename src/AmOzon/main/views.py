@@ -30,18 +30,6 @@ def checkout(request):
     }
     return render(request,'main/chekout.html', context)
 
-<<<<<<< HEAD
-#Новые данные№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№
-def tovar(request):
-    return render(request,'main/tovar.html')
-
-def change(request):
-    return render(request,'main/change.html')
-
-def delete(request):
-    return render(request,'main/delete.html')
-#Новые данные№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№№
-=======
 @permission_required('main.', login_url='userauth/seller_login/')
 def create(request):
     error = ''
@@ -61,7 +49,6 @@ def create(request):
         'error': error
     }
     return render(request, "main/create.html", data)
->>>>>>> main
 
 class ProductDetailView(DetailView):
     model = Product

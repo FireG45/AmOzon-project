@@ -27,13 +27,7 @@ urlpatterns = [
     path('checkout',views.checkout, name='checkout'),
     path('end_checkout',views.end_checkout, name='end_checkout'),
     path('cart', views.cart, name='cart'),
-<<<<<<< HEAD
-    path('tovar',views.tovar),
-    path('change',views.change),
-    path('delete',views.delete)
-=======
     path('create', views.create, name='create'),
     path('user_profile', views.user_profile, name='user_profile'),
     path('seller_profile', views.seller_profile, name='seller_profile'),
->>>>>>> main
 ]
