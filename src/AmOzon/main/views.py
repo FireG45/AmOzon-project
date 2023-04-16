@@ -1,8 +1,9 @@
-from django.shortcuts import render, HttpResponseRedirect
+from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import Product
-from userauth.models import Basket, User
-from django.views.generic import DetailView
-from django.contrib.auth.decorators import login_required
+from userauth.models import Basket, Seller
+from django.views.generic import DetailView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required, permission_required
+from .forms import CreateProduct
 
 # Create your views here.
 def index(request):
@@ -29,11 +30,48 @@ def checkout(request):
     }
     return render(request,'main/chekout.html', context)
 
+@permission_required('main.', login_url='userauth/seller_login/')
+def create(request):
+    error = ''
+    if request.method == 'POST':
+        form = CreateProduct(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.seller = Seller.objects.get(id=request.user.id)
+            product.save()
+            return redirect('home')
+        else:
+            error = form.errors
+
+    form = CreateProduct()
+    data = {
+        'form': form,
+        'error': error
+    }
+    return render(request, "main/create.html", data)
+
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'main/details.html' 
     context_object_name = 'product'
 
+class ProductUpdateView(UpdateView):
+    model = Product
+    template_name = 'main/update.html' 
+    context_object_name = 'product'
+    success_url = '/'
+    
+    form_class = CreateProduct
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'main/delete.html' 
+    context_object_name = 'product'
+    success_url = '/'
+
+    
+
+@login_required
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
@@ -46,12 +84,23 @@ def add_to_cart(request, product_id):
     
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+@login_required
 def remove_from_cart(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
+@login_required
 def end_checkout(request):
     for b in Basket.objects.filter(user=request.user):
         b.delete()
     return HttpResponseRedirect('/')
+
+@login_required
+def user_profile(request):
+    return HttpResponseRedirect('/')
+
+@permission_required('main.', login_url='userauth/seller_login/')
+def seller_profile(request):
+    return HttpResponseRedirect('/')
+

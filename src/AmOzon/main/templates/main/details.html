@@ -93,25 +93,27 @@
                     <strong>{{product.price}}<i class="fa-solid fa-ruble-sign"></i></strong>
                   </p>
                   <!-- Price -->
-
-                  <!-- Data -->
-                  <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
-                  <button type="button" class="btn btn-primary btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
-                    title="Remove item">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                  <button type="button" class="btn btn-danger btn-sm mb-2" data-mdb-toggle="tooltip"
-                    title="Move to the wish list">
-                    <i class="fas fa-heart"></i>
-                  </button>
-                  <!-- Data -->
                 </div>
                 </div>
               </div>
               <!-- Single item -->
-  
+              {% if perms.main. and user.id == product.seller.id %}
+              <div class=" card-footer">
+                <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
+                  <a href="{% url 'delete' product.id %}" type="button" class="btn btn-danger btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                    title="Удалить товар">
+                    <i class="fas fa-trash"></i>
+                  </a>
+
+                  <a href="{% url 'update' product.id %}" type="button" class="btn btn-info btn-sm me-1 mb-2" data-mdb-toggle="tooltip"
+                  title="Редактировать товар">
+                  <i class="fas fa-edit"></i>
+                  </a>
+              </div>
               <hr class="my-4" />
             </div>
+            {% endif %}
+
           </div>
           <div class="card mb-4">
             <div class="card-body">
@@ -151,6 +153,11 @@
               </a>
               {% endif %}
             </div>
+
+            <div class="card-body">
+              Продавец: {{product.seller}}
+            </div>
+
           </div>
         </div>
       </div>

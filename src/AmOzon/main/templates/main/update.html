@@ -1,0 +1,94 @@
+{% extends 'main/layout.html' %}
+
+{% block title %} Добавление товара {% endblock %}
+
+{% block content %}
+    <!-- <h1> Добавление товара </h1>
+        <form method="post">
+            {% csrf_token %}
+
+            {{ form.title }}<br>
+            {{ form.description }}<br>
+            {{ form.parameters }}<br>
+            {{ form.price }}<br>
+            {{ form.category }}<br>
+            {{ form.image }}<br>
+            
+            <span>{{error}}</span><br>
+            <button class="btn btn-success" type="submit">Сохранить</button>
+        </form> -->
+    <div class="container py-5 h-100">
+    {% if user.id == product.seller.id %}
+        <h1> Добавление товара </h1>
+        <span class=" error">{{error}}</span><br>
+
+        <form action="", method="post">
+            {% csrf_token %}
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.title }}
+                    <label class="form-label" for="{{ form.title.id_for_label }}">Название</label>
+                </div>
+                    </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.description }}
+                    <label class="form-label" for="{{ form.description.id_for_label }}">Описание</label>
+                </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.parameters }}
+                    <label class="form-label" for="{{ form.parameters.id_for_label }}">Характеристики</label>
+                </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.price }}
+                    <label class="form-label" for="{{ form.price.id_for_label }}">Цена</label>
+                </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.category }}
+                    <label class="form-label" for="{{ form.category.id_for_label }}">Категории (Категория1, Категория2)</label>
+                </div>
+                    </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="form-outline">
+                    {{ form.image }}
+                    <label class="form-label" for="{{ form.image.id_for_label }}">Ссылка на изображение</label>
+                </div>
+                    </div>
+            </div>
+
+            <div class="mt-4 pt-2">
+                <input class="btn btn-primary btn-lg" type="submit" value="Сохранить" />
+            </div>
+        </form>
+    {% else %}
+        <H1>Нет доступа!</H1>
+    {% endif %}
+    </div>
+
+
+
+  
+{% endblock %}
