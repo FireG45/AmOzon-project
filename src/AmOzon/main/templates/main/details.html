@@ -143,15 +143,9 @@
                       <span class="item__cor">200 - 400 кг/см</span>
                     </li>
                   </ul>
-                  {% if request.user.is_authenticated %}
               <a type="button" class="btn btn-primary btn-lg btn-block" href="{% url 'add_to_cart' product.id %}">
                 Добавить в корзину
               </a>
-              {% else %}
-              <a type="button" class="btn btn-primary btn-lg btn-block disabled">
-                Войдите что бы совершать покупки
-              </a>
-              {% endif %}
             </div>
 
             <div class="card-body">

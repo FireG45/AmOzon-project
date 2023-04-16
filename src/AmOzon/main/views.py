@@ -9,7 +9,7 @@ from .forms import CreateProduct
 def index(request):
     return render(request, 'main/index.html', {'products' : Product.objects.all()})
 
-@login_required
+@login_required(login_url='/userauth/login')
 def cart(request):
     baskets = Basket.objects.filter(user=request.user)
     total_sum = sum(b.price() for b in baskets)
@@ -19,7 +19,7 @@ def cart(request):
     }
     return render(request, 'main/cart.html', context)
 
-@login_required
+@login_required(login_url='/userauth/login')
 def checkout(request):
     baskets = Basket.objects.filter(user=request.user)
     total_sum = sum(b.price() for b in baskets)
@@ -39,7 +39,7 @@ def create(request):
             product = form.save(commit=False)
             product.seller = Seller.objects.get(id=request.user.id)
             product.save()
-            return redirect('home')
+            return redirect('seller_profile')
         else:
             error = form.errors
 
@@ -59,7 +59,7 @@ class ProductUpdateView(UpdateView):
     model = Product
     template_name = 'main/update.html' 
     context_object_name = 'product'
-    success_url = '/'
+    success_url = '/seller_profile'
     
     form_class = CreateProduct
 
@@ -67,11 +67,10 @@ class ProductDeleteView(DeleteView):
     model = Product
     template_name = 'main/delete.html' 
     context_object_name = 'product'
-    success_url = '/'
+    success_url = '/seller_profile'
 
-    
 
-@login_required
+@login_required(login_url='/userauth/login')
 def add_to_cart(request, product_id):
     product = Product.objects.get(id=product_id)
     baskets = Basket.objects.filter(user=request.user, product=product)
@@ -84,23 +83,28 @@ def add_to_cart(request, product_id):
     
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-@login_required
+@login_required(login_url='/userauth/login')
 def remove_from_cart(request, basket_id):
     basket = Basket.objects.get(id=basket_id)
     basket.delete()
     return HttpResponseRedirect(request.META['HTTP_REFERER'])
 
-@login_required
+@login_required(login_url='/userauth/login')
 def end_checkout(request):
     for b in Basket.objects.filter(user=request.user):
         b.delete()
     return HttpResponseRedirect('/')
 
-@login_required
+@login_required(login_url='/userauth/login')
 def user_profile(request):
     return HttpResponseRedirect('/')
 
 @permission_required('main.', login_url='userauth/seller_login/')
 def seller_profile(request):
-    return HttpResponseRedirect('/')
+    seller = Seller.objects.get(id=request.user.id)
+    products = Product.objects.filter(seller=seller)
+    data = {
+        'products' : products,
+    }
+    return render(request, "main/seller_profile.html", data)
 

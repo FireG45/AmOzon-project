@@ -9,7 +9,7 @@
         <form method="post">
             {% csrf_token %}
             <button class="btn btn-danger" type="submit">Удалить товар</button>
-            <a href="{% url 'details' product.id %}" class="btn btn-success">Отмена</a>  
+            <a href="{% url 'seller_profile' %}" class="btn btn-success">Отмена</a>  
         </form>
     {% else %}
         <H1>Нет доступа!</H1>
