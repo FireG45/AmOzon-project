@@ -23,4 +23,5 @@ urlpatterns = [
     path('seller_login/', views.seller_login, name="seller_login"),
     path('seller_register/', views.seller_register, name="seller_register"),
     path('logout/', views.logout, name="logout"),
+    path('user_account/', views.user_account, name="user_account"),
 ]
