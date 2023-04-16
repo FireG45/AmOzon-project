@@ -18,6 +18,7 @@ def login(request):
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
             if user:
+                print(user.user_permissions.all())
                 auth.login(request, user)
                 return HttpResponseRedirect('/')
 
@@ -48,6 +49,7 @@ def seller_login(request):
             password = request.POST['password']
             user = auth.authenticate(username=username, password=password)
             if user:
+                print(user.user_permissions.all())
                 auth.login(request, user)
                 return HttpResponseRedirect('/')
 
@@ -65,6 +67,7 @@ def seller_register(request):
             user = User.objects.get(username=request.POST['username'])
             permition = Permission.objects.get(name='is_seller')
             user.user_permissions.add(permition)
+            print()
             return HttpResponseRedirect(reverse('seller_login'))
         else:
             print("invalid")
