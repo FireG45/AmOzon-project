@@ -1,9 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import Product
-from userauth.models import Basket, Seller
+from userauth.models import Basket, Seller, User
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required, permission_required
-from .forms import CreateProduct
+from .forms import CreateProduct, CreateOrderInfo
 
 # Create your views here.
 def index(request):
@@ -21,14 +21,36 @@ def cart(request):
 
 @login_required(login_url='/userauth/login')
 def checkout(request):
+    # baskskets = Basket.objects.filter(user=request.user)
+    # total_sum = sum(b.price() for b in baskets)
+    # context = {
+    #     'baskets' : baskets,
+    #     'total_sum' : total_sum,
+    #     'total_count' : baskets.count()
+    # }
+    # return render(request,'main/chekout.html', context)
+    error = ''
     baskets = Basket.objects.filter(user=request.user)
     total_sum = sum(b.price() for b in baskets)
-    context = {
+    if request.method == 'POST':
+        form = CreateOrderInfo(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.seller = User.objects.get(id=request.user.id)
+            order.save()
+            return redirect('home')
+        else:
+            error = form.errors
+
+    form = CreateOrderInfo()
+    data = {
+        'form': form,
+        'error': error,
         'baskets' : baskets,
         'total_sum' : total_sum,
         'total_count' : baskets.count()
     }
-    return render(request,'main/chekout.html', context)
+    return render(request, "main/chekout.html", data)
 
 @permission_required('main.', login_url='userauth/seller_login/')
 def create(request):
