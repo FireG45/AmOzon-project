@@ -1,4 +1,5 @@
 from django.db import models
+from userauth.models import User, Basket
 
 # Create your models here.
 class Product(models.Model):
@@ -10,5 +11,15 @@ class Product(models.Model):
     image = models.URLField(verbose_name="Ссылка на изображение товара")
     seller = models.ForeignKey("userauth.Seller", on_delete=models.CASCADE)
 
-class Order(models.Model):
-    ...
+class OrderInfo(models.Model):
+    user = models.ForeignKey('userauth.User', on_delete=models.CASCADE)
+    seller = models.ForeignKey('userauth.Seller', on_delete=models.CASCADE, related_name='Seller')
+    first_name = models.CharField(verbose_name="Имя", max_length=250)
+    last_name = models.CharField(verbose_name="Фамилия", max_length=250)
+    email = models.EmailField(verbose_name="Электронная почта")
+    adress = models.CharField(verbose_name="Адрес", max_length=250)
+    post_index = models.SmallIntegerField(verbose_name="Почтовый Индекс")
+
+class OrderItem(models.Model):
+    order = models.ForeignKey('main.OrderInfo', on_delete=models.CASCADE)
+    basket = models.ForeignKey(to=Basket, on_delete=models.CASCADE)

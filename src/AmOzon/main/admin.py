@@ -1,8 +1,9 @@
 from django.contrib import admin
-from .models import Product
+from .models import Product, OrderInfo
 
 # Register your models here.
 admin.site.register(Product)
+admin.site.register(OrderInfo)
 
 @admin.action(description='Дублировать выбраннные записи')
 def duplicate(modeladmin, request, queryset):

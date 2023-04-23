@@ -106,5 +106,5 @@ def seller_profile(request):
     data = {
         'products' : products,
     }
-    return render(request, "main/seller_profile.html", data)
+    return render(request, "userauth/seller_profile.html", data)
 
