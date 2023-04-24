@@ -22,7 +22,8 @@
       <p class="lead">Будьте внимательны во время заполнения формы. Проверяйте все введенные данные</p>
     </div>
       <div class="col-md-7 col-lg-8">
-        <form class="needs-validation" novalidate>
+        <form  method="post" action="{% url 'update' product.id %}"  class="needs-validation" novalidate>
+          {% csrf_token %}
             <div class="col-sm-6">
               <label for="{{ form.title.id_for_label }}" class="form-label">Название Товара</label>
               {{ form.title }}
@@ -74,7 +75,7 @@
             </div>
           <hr class="my-4">
 
-          <a class="w-100 btn btn-primary btn-lg" type="submit" href="{% url 'end_checkout' %}">Сохранить товар</a>
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Добавить товар на площадку</button>
         </form>
       </div>
     </div>

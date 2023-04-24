@@ -23,4 +23,5 @@ urlpatterns = [
     path('seller_login/', views.seller_login, name="seller_login"),
     path('seller_register/', views.seller_register, name="seller_register"),
     path('logout/', views.logout, name="logout"),
+    path('<int:pk>/update', views.OrderUpdateView.as_view(), name="order"),
 ]

@@ -6,8 +6,10 @@ from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.auth.models import Permission
-from main.models import Product
+from main.models import OrderInfo, OrderItem, Product
 from django.contrib.contenttypes.models import ContentType
+from django.views.generic import DetailView, UpdateView, DeleteView
+from main.forms import CreateOrderInfo, OrderStatus
 
 # Create your views here.
 def login(request):
@@ -81,4 +83,34 @@ def logout(request):
     auth.logout(request)
     return HttpResponseRedirect(reverse('home'))
 
+
+class OrderUpdateView(UpdateView):
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get a context
+        context = super().get_context_data(**kwargs)
+        print(context)
+        # Add in the publisher
+        context["orderItems"] = OrderItem.objects.all()
+        self.args
+        return context
+    
+    model = OrderInfo
+    template_name = 'main/order.html' 
+    context_object_name = 'order'
+    success_url = '/seller_profile'
+    
+    
+    form_class = OrderStatus
+
+# class OrderUpdateView(UpdateView):
+#     def form_invalid(self, form):
+#         print(form.errors.as_text())
+#         return super().form_invalid(form)
+
+#     model = OrderInfo
+#     template_name = 'main/order.html' 
+#     context_object_name = 'order'
+#     success_url = '/seller_profile'
+    
+#     form_class = OrderStatus
 
