@@ -1,3 +1,4 @@
+from django.utils import timezone
 from django.db import models
 from userauth.models import User, Basket
 
@@ -13,6 +14,9 @@ class Product(models.Model):
 
 class OrderInfo(models.Model):
     user = models.ForeignKey('userauth.User', on_delete=models.CASCADE)
+    seller = models.ForeignKey('userauth.Seller', on_delete=models.CASCADE, related_name='seller')
+    status = models.CharField(verbose_name='Статус', max_length=50, default='Принят продавцом')
+    date = models.DateTimeField(verbose_name='Дата', default=timezone.now)
     first_name = models.CharField(verbose_name="Имя", max_length=250)
     last_name = models.CharField(verbose_name="Фамилия", max_length=250)
     email = models.EmailField(verbose_name="Электронная почта")
@@ -21,4 +25,4 @@ class OrderInfo(models.Model):
 
 class OrderItem(models.Model):
     order = models.ForeignKey('main.OrderInfo', on_delete=models.CASCADE)
-    basket = models.ForeignKey(to=Basket, on_delete=models.CASCADE)
+    product = models.ForeignKey(to=Product, on_delete=models.CASCADE)

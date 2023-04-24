@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, redirect
-from .models import Product
+from .models import Product, OrderItem, OrderInfo
 from userauth.models import Basket, Seller, User
 from django.views.generic import DetailView, UpdateView, DeleteView
 from django.contrib.auth.decorators import login_required, permission_required
@@ -21,23 +21,30 @@ def cart(request):
 
 @login_required(login_url='/userauth/login')
 def checkout(request):
-    # baskskets = Basket.objects.filter(user=request.user)
-    # total_sum = sum(b.price() for b in baskets)
-    # context = {
-    #     'baskets' : baskets,
-    #     'total_sum' : total_sum,
-    #     'total_count' : baskets.count()
-    # }
-    # return render(request,'main/chekout.html', context)
     error = ''
     baskets = Basket.objects.filter(user=request.user)
     total_sum = sum(b.price() for b in baskets)
+    sellers_dict = {}
+    for b in baskets:
+        sellers_dict[b.product.seller] = []
+
+    for b in baskets:
+        sellers_dict[b.product.seller] += [b.product]
+
     if request.method == 'POST':
         form = CreateOrderInfo(request.POST)
         if form.is_valid():
-            order = form.save(commit=False)
-            order.seller = User.objects.get(id=request.user.id)
-            order.save()
+            order_info = form.save(commit=False)
+            print(sellers_dict)
+            for s in sellers_dict.keys():
+                _order_info = form.save(commit=False)
+                _order_info.id = None
+                _order_info.user = User.objects.get(id=request.user.id)
+                _order_info.seller = Seller.objects.get(id=s.id)
+                _order_info.save()
+                for p in sellers_dict[s]:
+                    item = OrderItem.objects.create(product=Product.objects.get(id=p.id), order = OrderInfo.objects.get(id=order_info.id))
+                    item.save()
             return redirect('home')
         else:
             error = form.errors
@@ -61,9 +68,11 @@ def create(request):
             product = form.save(commit=False)
             product.seller = Seller.objects.get(id=request.user.id)
             product.save()
+            
             return redirect('seller_profile')
         else:
             error = form.errors
+            error = error.as_text()
 
     form = CreateProduct()
     data = {
@@ -125,8 +134,10 @@ def user_profile(request):
 def seller_profile(request):
     seller = Seller.objects.get(id=request.user.id)
     products = Product.objects.filter(seller=seller)
+    orders = OrderInfo.objects.filter(seller=seller)
     data = {
         'products' : products,
+        'orders' : orders,
     }
     return render(request, "userauth/seller_profile.html", data)
 

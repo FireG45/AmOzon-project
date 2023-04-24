@@ -1,0 +1,168 @@
+<!doctype html>
+
+
+{% extends 'main/layout.html' %}
+{% load static %}
+{% block title %} AmOzon - Главная {% endblock %}
+
+{% block content %}
+
+<html lang="en" data-bs-theme="auto">
+  <head><script src="../assets/js/color-modes.js"></script>
+
+    <meta charset="utf-8">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/checkout/">
+    <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
+
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/checkout.css' %}" rel="stylesheet">
+  </head>   
+<body>   
+<div class="container">
+  <main>
+    <div class="py-5 text-center">
+      <h2>Оформление заказа</h2>
+      <p class="lead">Будьте внимательны во время заполнения формы. Проверяйте все введенные данные</p>
+    </div>
+
+    <div class="row g-5">
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <h4 class="d-flex justify-content-between align-items-center mb-3">
+          <span class="text-primary">Корзина заказа</span>
+          <span class="badge bg-primary rounded-pill">{{total_count}}</span>
+        </h4>
+        <ul class="list-group mb-3">
+          {% for cart_item in orderItems %}
+            {% if cart_item.order.id == order.id %}
+          <li class="list-group-item d-flex justify-content-between lh-sm">
+            <div>
+              <h6 class="my-0"> {{cart_item.product.title}} </h6>
+              <!-- <small class="text-body-secondary">Brief description</small> -->
+            </div>
+            <span class="text-body-secondary">{{ cart_item.price }} <i class="fa-solid fa-ruble-sign"></i></span>
+          </li>
+          {% endif %}
+
+          {% endfor %}
+          <!-- <li class="list-group-item d-flex justify-content-between bg-body-tertiary">
+            <div class="text-success">
+              <h6 class="my-0">Promo code</h6>
+              <small>EXAMPLECODE</small>
+            </div>
+            <span class="text-success">−$5</span>
+          </li> -->
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Итого</span>
+            <strong>{{ total_sum }} <i class="fa-solid fa-ruble-sign"></i></strong>
+          </li>
+        </ul>
+
+        <!-- <form class="card p-2">
+          <div class="input-group">
+            <input type="text" class="form-control" placeholder="Promo code">
+            <button type="submit" class="btn btn-secondary">Redeem</button>
+          </div>
+        </form> -->
+      </div>
+      <h1>{{forerror}}</h1>
+      <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Адрес доставки</h4>
+
+        <div class="row g-3">
+          <div class="col-sm-6">
+            <label for="{{form.first_name.id_for_label}}" class="form-label">Имя</label>
+            <!-- <input type="text" class="form-control" id="firstName" placeholder="" value="" required> -->
+            {{ form.first_name }}
+            <div class="invalid-feedback">
+              Введите настоящее Имя
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="{{form.last_name.id_for_label}}" class="form-label">Фамилия</label>
+            <!-- <input type="text" class="form-control" id="lastName" placeholder="" value="" required> -->
+            {{form.last_name}}
+            <div class="invalid-feedback">
+              Введите настоящую Фамилию
+            </div>
+          </div>
+
+          <div class="col-12">
+            <label for="{{form.email.id_for_label}}" class="form-label">Электронная почта <span class="text-body-secondary"></span></label>
+            <!-- <input type="email" class="form-control" id="email" placeholder="логин@вашапочта.com"> -->
+            {{form.email}}
+            <div class="invalid-feedback">
+              Введите действительный адрес электронной почты, чтобы следить за состоянием заказа.
+            </div>
+          </div>
+
+          <div class="col-sm-9">
+            <label for="{{form.adress.id_for_label}}" class="form-label">Адрес</label>
+            <!-- <input type="text" class="form-control" id="address" placeholder="Город.улица.дом" required> -->
+            {{form.adress}}
+            <div class="invalid-feedback">
+              Введите адрес доставки
+            </div>
+          </div>
+
+          <!-- <div class="col-md-4">
+            <label for="state" class="form-label">Регион</label>
+            <select class="form-select" id="state" required>
+              <option value="">Выберите...</option>
+              <option>Республика Татарстан</option>
+              <option>Республика Алтай</option>
+              <option>Республика Удмуртия</option>
+            </select>
+            <div class="invalid-feedback">
+              Введите регион доставки
+            </div>
+          </div> -->
+
+          <div class="col-sm-3">
+            <label for="{{form.post_index.id_for_label}}" class="form-label">Почтовый индекс</label>
+            <!-- <input type="text" class="form-control" id="zip" placeholder="" required> -->
+            {{form.post_index}}
+            <div class="invalid-feedback">
+              Введите почтовый индекс
+            </div>
+          </div>
+        </div>
+
+        <form method="post" action="{% url 'order' order.id %}">
+          {% csrf_token %}
+          <hr class="my-3">
+          
+          <h4 class="mb-3">Статус заказа</h4>
+
+          <div class="row gy-3">
+              <div class="col-md-4">
+                {{form.status}}
+              </select>
+            </div>
+          </div>
+
+          <hr class="my-4">
+
+          <button class="w-100 btn btn-primary btn-lg" type="submit">Закончить оформление</button>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- <footer class="my-5 pt-5 text-body-secondary text-center text-small">
+    <p class="mb-1">&copy; 2023 AmOzon</p>
+    <ul class="list-inline">
+      <li class="list-inline-item"><a href="#">Privacy</a></li>
+      <li class="list-inline-item"><a href="#">Terms</a></li>
+      <li class="list-inline-item"><a href="#">Support</a></li>
+    </ul>
+  </footer> -->
+</div>
+
+
+    <!-- <script src="../assets/dist/js/bootstrap.bundle.min.js"></script> -->
+
+  </body>
+  {% endblock %}
+</html>
