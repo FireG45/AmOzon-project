@@ -22,8 +22,7 @@
 <div class="container">
   <main>
     <div class="py-5 text-center">
-      <h2>Оформление заказа</h2>
-      <p class="lead">Будьте внимательны во время заполнения формы. Проверяйте все введенные данные</p>
+      <h2>Статус заказа</h2>
     </div>
 
     <div class="row g-5">
@@ -40,7 +39,7 @@
               <h6 class="my-0"> {{cart_item.product.title}} </h6>
               <!-- <small class="text-body-secondary">Brief description</small> -->
             </div>
-            <span class="text-body-secondary">{{ cart_item.price }} <i class="fa-solid fa-ruble-sign"></i></span>
+            <span class="text-body-secondary">{{ cart_item.product.price }} <i class="fa-solid fa-ruble-sign"></i></span>
           </li>
           {% endif %}
 
@@ -52,10 +51,10 @@
             </div>
             <span class="text-success">−$5</span>
           </li> -->
-          <li class="list-group-item d-flex justify-content-between">
+          <!-- <li class="list-group-item d-flex justify-content-between">
             <span>Итого</span>
             <strong>{{ total_sum }} <i class="fa-solid fa-ruble-sign"></i></strong>
-          </li>
+          </li> -->
         </ul>
 
         <!-- <form class="card p-2">
@@ -138,7 +137,6 @@
           <div class="row gy-3">
               <div class="col-md-4">
                 {{form.status}}
-              </select>
             </div>
           </div>
 

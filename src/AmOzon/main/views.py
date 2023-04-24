@@ -128,7 +128,11 @@ def end_checkout(request):
 
 @login_required(login_url='/userauth/login')
 def user_profile(request):
-        return render(request, "userauth/user_profile.html")
+    orders = OrderInfo.objects.filter(user=request.user)
+    context = {
+        'orders' : orders
+    }
+    return render(request, "userauth/user_profile.html", context)
 
 @permission_required('main.', login_url='userauth/seller_login/')
 def seller_profile(request):

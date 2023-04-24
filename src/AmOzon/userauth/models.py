@@ -15,10 +15,10 @@ class User(AbstractUser):
 
 class Seller(User):
     verbouse_name='Магазины'
-    shop_name = models.CharField(max_length=50)
-    org_type = models.CharField(max_length=10)
-    inn_code = models.CharField(max_length=13)
-    store_tags = models.TextField()
+    shop_name = models.CharField(max_length=50, verbose_name='Название магазина')
+    org_type = models.CharField(max_length=10, verbose_name='Тип организации')
+    inn_code = models.CharField(max_length=13, verbose_name='ИНН')
+    store_tags = models.TextField(verbose_name='Категории')
 
     class Meta:
         verbose_name = "Магазин"

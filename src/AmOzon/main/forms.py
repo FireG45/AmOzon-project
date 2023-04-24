@@ -50,28 +50,27 @@ class CreateOrderInfo(forms.ModelForm):
         
 class OrderStatus(forms.ModelForm):
     first_name = forms.CharField(required=False, disabled=True, widget=forms.TextInput(attrs={
-        'class': 'form-control form-control-lg disabled',
+        'class': 'form-control form-control-lg',
     }))
     last_name = forms.CharField(required=False, disabled=True, widget=forms.TextInput(attrs={
-        'class': 'form-control form-control-lg disabled',
+        'class': 'form-control form-control-lg',
     }))
     email = forms.EmailField(required=False, disabled=True, widget=forms.EmailInput(attrs={
-        'class': 'form-control form-control-lg disabled',
+        'class': 'form-control form-control-lg',
     }))
     adress = forms.CharField(required=False, disabled=True, widget=forms.TextInput(attrs={
-        'class': 'form-control form-control-lg disabled',
+        'class': 'form-control form-control-lg',
     }))
     post_index = forms.IntegerField(required=False, disabled=True, widget=forms.TextInput(attrs={
-        'class': 'form-control form-control-lg disabled',
+        'class': 'form-control form-control-lg',
     }))
 
 
-    status = forms.MultipleChoiceField(required=False, widget=forms.Select(),
+    status = forms.ChoiceField(required=False,
                                        choices=(
         ('Передан продавцу', 'Передан продавцу'),
         ('Принят продавцом', 'Принят продавцом'),
         ('В доставке', 'В доставке'),
-        ('Получен', 'Получен'),
         ))
     
     class Meta:

@@ -102,3 +102,15 @@ class OrderUpdateView(UpdateView):
     
     form_class = OrderStatus
 
+# class OrderUpdateView(UpdateView):
+#     def form_invalid(self, form):
+#         print(form.errors.as_text())
+#         return super().form_invalid(form)
+
+#     model = OrderInfo
+#     template_name = 'main/order.html' 
+#     context_object_name = 'order'
+#     success_url = '/seller_profile'
+    
+#     form_class = OrderStatus
+

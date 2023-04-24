@@ -13,9 +13,15 @@ class Product(models.Model):
     seller = models.ForeignKey("userauth.Seller", on_delete=models.CASCADE)
 
 class OrderInfo(models.Model):
+    class Status(models.TextChoices):
+        SENDED = ('Передан продавцу'), ('Передан продавцу')
+        ACCEPTED = ('Принят продавцом'), ('Принят продавцом')
+        DELIVERY = ('В доставке'), ('В доставке')
+        ENDED = ('Доставлен'), ('Доставлен')
+
     user = models.ForeignKey('userauth.User', on_delete=models.CASCADE)
     seller = models.ForeignKey('userauth.Seller', on_delete=models.CASCADE, related_name='seller')
-    status = models.CharField(verbose_name='Статус', max_length=50, default='Принят продавцом')
+    status = models.CharField(max_length=50, default='Передан продавцу')
     date = models.DateTimeField(verbose_name='Дата', default=timezone.now)
     first_name = models.CharField(verbose_name="Имя", max_length=250)
     last_name = models.CharField(verbose_name="Фамилия", max_length=250)
