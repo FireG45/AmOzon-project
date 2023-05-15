@@ -71,18 +71,20 @@
             <h6>Ваши Заказы</h6>
             <hr>
             <div class="table-responsive">
-              <table class="table table-striped table-sm">
+              <table class="table table-striped table-sm"  width="100%">
                 <thead>
                   <tr>
                     <th scope="col">Наименование</th>
                     <th scope="col">Статус</th>
+                    <th scope="col-1">Дата доставки</th>
                   </tr>
                 </thead>
                 <tbody>
                 {% for o in orders %}
                   <tr>
-                    <td><a href="">Заказ #{{ o.id }} от {{o.date}}</a></td>
-                    <td>{{o.status}}</td>
+                    <td><a href="">Заказ #{{ o.order.id }} от {{o.order.date}}</a></td>
+                    <td>{{o.order.status}}</td>
+                    <td>{{o.arrival_date}}</td>
                   </tr>
                 {% endfor %}
                 </tbody>

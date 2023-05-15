@@ -1,3 +1,5 @@
+import datetime
+import random
 from django.shortcuts import render, HttpResponseRedirect, redirect
 from .models import Product, OrderItem, OrderInfo
 from userauth.models import Basket, Seller, User
@@ -7,6 +9,7 @@ from .forms import CreateProduct, CreateOrderInfo
 
 # Create your views here.
 def index(request):
+    print(request)
     return render(request, 'main/index.html', {'products' : Product.objects.all()})
 
 @login_required(login_url='/userauth/login')
@@ -128,9 +131,20 @@ def end_checkout(request):
 
 @login_required(login_url='/userauth/login')
 def user_profile(request):
+    class OrderContainer:
+        def __init__(self, order, arrival_date) -> None:
+            self.order = order
+            self.arrival_date = arrival_date
+    orders_containers = []
     orders = OrderInfo.objects.filter(user=request.user)
+    
+    for o in orders:
+        random.seed(sum([ord(s) for s in (str(o.date) + str(o.id))]))
+        ddd = datetime.date(o.date.year, o.date.month, o.date.day) + datetime.timedelta(random.randint(2, 6))
+        orders_container = OrderContainer(o, ddd)
+        orders_containers.append(orders_container)
     context = {
-        'orders' : orders
+        'orders' : orders_containers
     }
     return render(request, "userauth/user_profile.html", context)
 

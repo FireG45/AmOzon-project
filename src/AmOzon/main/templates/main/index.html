@@ -9,7 +9,7 @@
         {% for prod in products %}
         <div class="col">
           <div class="card shadow-sm">
-            <img src="{{prod.image}}" height="50%" role="img" preserveaspectratio="xMidYMid slice" focusable="false">
+            <img src="{{prod.image}}" height="20%" role="img" preserveaspectratio="xMidYMid slice" focusable="false">
             <div class="card-body">
               <a href="{% url 'details' prod.id %}"><p class="card-text">{{prod.title}}</p></a>
               <div class="d-flex justify-content-between align-items-center">

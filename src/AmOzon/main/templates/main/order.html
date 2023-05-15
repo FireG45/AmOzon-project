@@ -128,6 +128,19 @@
           </div>
         </div>
 
+        <div class="col-md-4">
+          <label for="state" class="{{form.speed.id_for_label}}">Тип отправления</label>
+          <!-- <select class="form-select" id="state" required>
+            <option value="">Выберите...</option>
+            <option>Обычный 200<i class="fa-solid fa-ruble-sign"></i></option>
+            <option>Экспресс 500<i class="fa-solid fa-ruble-sign"></i></option>
+          </select> -->
+          {{form.speed}}
+          <div class="invalid-feedback">
+            Выберите тип отправления
+          </div>
+        </div>
+
         <form method="post" action="{% url 'order' order.id %}">
           {% csrf_token %}
           <hr class="my-3">

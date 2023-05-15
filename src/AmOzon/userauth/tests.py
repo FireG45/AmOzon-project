@@ -1,6 +1,8 @@
+from django.http import HttpResponse
 from .models import User, Seller, Basket
 from main.models import Product
-from django.test import TestCase
+from userauth.views import *
+from django.test import TestCase, RequestFactory
 
 # Create your tests here.
 class SellerTestCase(TestCase):
@@ -29,7 +31,7 @@ class SellerTestCase(TestCase):
 
 class BasketTestCase(TestCase):
     def setUp(self) -> None:
-        Seller.objects.create()
+        Seller.objects.create(id=1)
         User.objects.create(username='user')
         Product.objects.create(price=100, seller_id = 1)
         Basket.objects.create(user=User.objects.get(id=1), product=Product.objects.get(id=1))
@@ -43,5 +45,42 @@ class BasketTestCase(TestCase):
         basket = Basket.objects.get(id=1)
         self.assertEqual(basket.price(), basket.product.price * basket.quantity)
 
+class ViewsTestCase(TestCase):
+    def setUp(self) -> None:
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username="jacob", email="jacob@…", password="top_secret"
+        )
+        self.seller = Seller.objects.create(id=1)
+        Product.objects.create(price=100, seller_id = 1)
+        OrderInfo.objects.create(id=1,user=self.user, seller = self.seller, post_index = 0)
+        self.basket = Basket.objects.create(user=self.user, product=Product.objects.get(id=1), quantity=1)
+        self.request = self.factory.get("/")
+        self.request_post = self.factory.post("/")
+        self.request.user = self.user
+        self.request_post.user = self.user
 
-    
+    def test_login_view(self):
+        res = login(self.request_post)
+        res2 = login(self.request)
+        self.assertTrue(isinstance(res, HttpResponse) and isinstance(res2, HttpResponse))
+
+    def test_register_view(self):
+        res = register(self.request_post)
+        res2 = register(self.request)
+        self.assertTrue(isinstance(res, HttpResponse) and isinstance(res2, HttpResponse))
+
+    def test_seller_login_view(self):
+        res = seller_login(self.request_post)
+        res2 = seller_login(self.request)
+        self.assertTrue(isinstance(res, HttpResponse) and isinstance(res2, HttpResponse))
+
+    def test_seller_register_login_view(self):
+        res = seller_register(self.request_post)
+        res2 = seller_register(self.request)
+        self.assertTrue(isinstance(res, HttpResponse) and isinstance(res2, HttpResponse))
+
+    # def test_logout_login_view(self):
+    #     res = logout(self.request_post)
+    #     res2 = logout(self.request)
+    #     self.assertTrue(isinstance(res, HttpResponse) and isinstance(res2, HttpResponse))

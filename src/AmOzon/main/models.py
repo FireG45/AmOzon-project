@@ -28,6 +28,7 @@ class OrderInfo(models.Model):
     email = models.EmailField(verbose_name="Электронная почта")
     adress = models.CharField(verbose_name="Адрес", max_length=250)
     post_index = models.SmallIntegerField(verbose_name="Почтовый Индекс")
+    speed = models.SmallIntegerField(verbose_name="Тип отправления")
 
 class OrderItem(models.Model):
     order = models.ForeignKey('main.OrderInfo', on_delete=models.CASCADE)
