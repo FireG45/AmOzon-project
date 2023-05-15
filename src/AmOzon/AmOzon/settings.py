@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'main',
     'userauth',
     'phonenumber_field',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
